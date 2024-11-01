@@ -1,6 +1,9 @@
 import os
+from random import random
+
 import requests
-from flask import Flask
+import json
+from flask import Flask, request
 from redis import Redis
 from dotenv import load_dotenv
 import logging
@@ -17,11 +20,50 @@ WORD_MEANING_SERVICE = os.getenv("WORD_MEANING_SERVICE")
 
 app = Flask(__name__)
 
+def get_random_word() -> str:
+    headers = {
+        "x-api-key": API_KEY
+    }
+    result = requests.get(RANDOM_WORD_SERVICE, headers=headers)
+    word = json.loads(result.content.decode())["word"][0]
+    return word
+
+def get_meaning_of_word(word: str) -> str:
+    headers = {
+        "x-api-key": API_KEY
+    }
+    params = {
+        "word": word
+    }
+    result = requests.get(WORD_MEANING_SERVICE, headers=headers, params=params)
+    meaning = json.loads(result.content.decode())["definition"]
+    return meaning
+
 @app.route("/")
 def liveness():
     logger.info("liveness called.")
     return {"message": "server is up."}
 
+@app.route("/meaning/")
+def meaning_of_word():
+    word = request.args.get("word")
+    meaning = get_meaning_of_word(word)
+    result = {
+        "word": word,
+        "meaning": meaning
+    }
+    return result
+
+@app.route("/random-word-with-meaning/")
+def random_word_with_meaning():
+    random_word = get_random_word()
+    meaning = get_meaning_of_word(random_word)
+    result = {
+        "random_word": random_word,
+        "meaning": meaning
+    }
+    return result
 
 if __name__ == "__main__":
+    # print(get_meaning_of_word("interest"))
     app.run("0.0.0.0", SERVER_PORT)
