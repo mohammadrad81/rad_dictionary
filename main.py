@@ -45,7 +45,7 @@ def get_meaning_of_word(word: str) -> tuple[str, bool]:
     }
     result = requests.get(WORD_MEANING_SERVICE, headers=headers, params=params)
     meaning = json.loads(result.content.decode())["definition"]
-    cache.set(word, meaning)
+    cache.set(word, meaning, ex=CACHING_TIME)
     return meaning, False
 
 @app.route("/")
