@@ -1,0 +1,32 @@
+version: 1.0.0
+networks:
+  rad_dict_net:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 172.19.0.0/16
+         gateway: 172.19.0.1
+
+services:
+  redis:
+    image: redis/redis-stack-server:latest
+    container_name: rad-redis
+    volumes:
+      - ~/rad_dictionary_redis:/data
+    networks:
+      rad_dict_net:
+        ipv4_address: 172.19.0.2
+  web:
+#    image: 13111400/rad_dictionary:latest
+    container_name: rad-dictionary-container
+    ports:
+      - 8080:8080
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - redis
+
+    networks:
+      rad_dict_net:
+        ipv4_address: 172.19.0.3

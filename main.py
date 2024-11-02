@@ -29,13 +29,18 @@ def get_random_word() -> str:
     headers = {
         "x-api-key": API_KEY
     }
+    logger.info("before sending request to receive random word.")
     result = requests.get(RANDOM_WORD_SERVICE, headers=headers)
+    logger.info("random word received")
     word = json.loads(result.content.decode())["word"][0]
     return word
 
 def get_meaning_of_word(word: str) -> tuple[str, bool]:
+    logger.info("before checking cache for word")
     cached_value = cache.get(word)
+    logger.info("after checking cache for word")
     if cached_value is not None:
+        logger.info("word was in cache")
         return cached_value.decode(), True
     headers = {
         "x-api-key": API_KEY
@@ -43,7 +48,9 @@ def get_meaning_of_word(word: str) -> tuple[str, bool]:
     params = {
         "word": word
     }
+    logger.info("before getting the meaning of the word")
     result = requests.get(WORD_MEANING_SERVICE, headers=headers, params=params)
+    logger.info("after getting the meaning of the word")
     meaning = json.loads(result.content.decode())["definition"]
     cache.set(word, meaning, ex=CACHING_TIME)
     return meaning, False
@@ -56,6 +63,7 @@ def liveness():
 @app.route("/meaning/")
 def meaning_of_word():
     word = request.args.get("word")
+    logger.info("meaning_of_word_called")
     meaning, from_cache = get_meaning_of_word(word)
     result = {
         "word": word,
