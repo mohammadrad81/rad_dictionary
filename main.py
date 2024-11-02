@@ -24,7 +24,7 @@ print(REDIS_CACHE_PORT)
 
 app = Flask(__name__)
 cache = Redis(REDIS_CACHE_IP, REDIS_CACHE_PORT)
-
+# just a comment
 def get_random_word() -> str:
     headers = {
         "x-api-key": API_KEY
