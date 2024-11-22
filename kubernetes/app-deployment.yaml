@@ -16,11 +16,16 @@ spec:
     spec:
       containers:
       - name: rad-dictionary
-        image: 13111400/rad_dictionary:latest
+        image: 13111400/rad_dictionary
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
         env:
+        - name: API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: rad-dictionary-secret
+              key: API_KEY
         - name: CACHING_TIME
           valueFrom:
             configMapKeyRef:
