@@ -7,5 +7,5 @@ data:
   SERVER_PORT: "8080"
   RANDOM_WORD_SERVICE: "https://api.api-ninjas.com/v1/randomword"
   WORD_MEANING_SERVICE: "https://api.api-ninjas.com/v1/dictionary"
-  REDIS_CACHE_IP: "172.19.0.2"
+  REDIS_CACHE_IP: "10.107.31.184"
   REDIS_CACHE_PORT: "6379"
