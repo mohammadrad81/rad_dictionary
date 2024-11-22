@@ -17,6 +17,37 @@ spec:
       containers:
       - name: rad-dictionary
         image: 13111400/rad_dictionary:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
+        env:
+        - name: CACHING_TIME
+          valueFrom:
+            configMapKeyRef:
+              name: rad-dictionary-config-map
+              key: CACHING_TIME
+        - name: SERVER_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: rad-dictionary-config-map
+              key: SERVER_PORT
+        - name: RANDOM_WORD_SERVICE
+          valueFrom:
+            configMapKeyRef:
+              name: rad-dictionary-config-map
+              key: RANDOM_WORD_SERVICE
+        - name: WORD_MEANING_SERVICE
+          valueFrom:
+            configMapKeyRef:
+              name: rad-dictionary-config-map
+              key: WORD_MEANING_SERVICE
+        - name: REDIS_CACHE_IP
+          valueFrom:
+            configMapKeyRef:
+              name: rad-dictionary-config-map
+              key: REDIS_CACHE_IP
+        - name: REDIS_CACHE_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: rad-dictionary-config-map
+              key: REDIS_CACHE_PORT

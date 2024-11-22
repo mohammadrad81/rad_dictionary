@@ -52,6 +52,7 @@ def get_meaning_of_word(word: str) -> tuple[str, bool]:
     logger.info("before getting the meaning of the word")
     result = requests.get(WORD_MEANING_SERVICE, headers=headers, params=params)
     logger.info("after getting the meaning of the word")
+    logger.info("content:\n", result.content.decode())
     meaning = json.loads(result.content.decode())["definition"]
     cache.set(word, meaning, ex=CACHING_TIME)
     return meaning, False
