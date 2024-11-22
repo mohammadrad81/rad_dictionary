@@ -17,7 +17,7 @@ spec:
       containers:
       - name: rad-dictionary
         image: 13111400/rad_dictionary
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
         env:
