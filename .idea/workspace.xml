@@ -5,10 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="495b1f66-515f-4aeb-aa18-8623c0ff68c9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/kubernetes/redis-pv.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kubernetes/redis-pvc.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kubernetes/redis-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/kubernetes/redis-deployment.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kubernetes/redis-pv.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/kubernetes/redis-pv.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kubernetes/redis-pvc.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/kubernetes/redis-pvc.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
