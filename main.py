@@ -10,6 +10,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(filename='rad_dictionary.log', encoding='utf-8', level=logging.DEBUG)
+logger.addHandler(logging.StreamHandler())
 
 load_dotenv()
 SERVER_PORT = int(os.getenv("SERVER_PORT"))
